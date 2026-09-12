@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DracRun — Gothic 3D Endless Runner</title>
+  <meta name="description" content="A 3D perspective gothic endless runner web game. Escape the moonlight searchlights as Count Dracula!">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Main Game Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Top HUD Overlay -->
+    <div id="hud-overlay" class="ui-layer hidden">
+      <div class="hud-top-bar">
+        <!-- Vitality Health Vial -->
+        <div class="vitality-container">
+          <div class="vitality-label">BLOOD VITALITY</div>
+          <div class="vitality-vial">
+            <div id="vitality-bar" class="vitality-fill" style="width: 100%;"></div>
+            <div class="vitality-shine"></div>
+          </div>
+          <div id="vitality-text" class="vitality-val">100%</div>
+        </div>
+
+        <!-- Score & Stats Counter -->
+        <div class="score-container">
+          <div class="score-card">
+            <span class="score-label">SCORE</span>
+            <span id="score-display" class="score-value">000000</span>
+          </div>
+          <div class="score-card mini">
+            <span class="score-label">BLOOD</span>
+            <span id="blood-display" class="score-value-mini">🩸 0</span>
+          </div>
+          <div class="score-card mini">
+            <span class="score-label">BEST</span>
+            <span id="highscore-display" class="score-value-mini">🏆 0</span>
+          </div>
+        </div>
+
+        <!-- Quick Settings Actions -->
+        <div class="hud-actions">
+          <button id="btn-sound-toggle" class="icon-btn" title="Toggle Audio (M)">🔊</button>
+          <button id="btn-touch-toggle" class="icon-btn" title="Toggle Touch Controls">📱</button>
+          <button id="btn-pause" class="icon-btn" title="Pause Game (P/Esc)">⏸️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen Vignette / Burn Flash -->
+    <div id="burn-overlay" class="burn-flash"></div>
+    <div id="damage-vignette" class="damage-vignette"></div>
+
+    <!-- On-Screen Accessibility Touch Buttons (Mobile / Optional) -->
+    <div id="touch-controls" class="touch-layer hidden">
+      <button id="touch-left" class="touch-btn">◀</button>
+      <button id="touch-jump" class="touch-btn jump-btn">🦇 JUMP</button>
+      <button id="touch-right" class="touch-btn">▶</button>
+    </div>
+
+    <!-- Start / Title Screen Overlay -->
+    <div id="screen-start" class="modal-overlay">
+      <div class="gothic-modal start-box">
+        <div class="gothic-title-container">
+          <h1 class="gothic-title">DRACRUN</h1>
+          <div class="gothic-subtitle">TRANSYLVANIAN MIDNIGHT FLIGHT</div>
+        </div>
+
+        <div class="modal-body">
+          <div class="story-text">
+            Outrun the blazing searchlights and deadly flashlights along the cathedral rooftops! Collect blood droplets to restore your vitality.
+          </div>
+
+          <div class="controls-guide">
+            <h3>HUNTER CONTROLS</h3>
+            <div class="control-row">
+              <span class="key-badge">◀ / A</span>
+              <span class="key-badge">▶ / D</span>
+              <span class="control-desc">Switch Lanes</span>
+            </div>
+            <div class="control-row">
+              <span class="key-badge">▲ / W / SPACE</span>
+              <span class="control-desc">Bat Morph Jump (Clear Ground Lights)</span>
+            </div>
+            <div class="control-row">
+              <span class="key-badge">SWIPE</span>
+              <span class="control-desc">Left / Right / Up (Mobile Touch)</span>
+            </div>
+            <div class="control-row">
+              <span class="key-badge">P / ESC</span>
+              <span class="control-desc">Pause / Resume</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button id="btn-start" class="gothic-btn pulse">
+            <span>BEGIN HUNT</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause Screen Overlay -->
+    <div id="screen-pause" class="modal-overlay hidden">
+      <div class="gothic-modal pause-box">
+        <h2 class="gothic-heading">HUNT PAUSED</h2>
+        <div class="modal-actions">
+          <button id="btn-resume" class="gothic-btn">RESUME</button>
+          <button id="btn-restart-pause" class="gothic-btn secondary">RESTART</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen Overlay -->
+    <div id="screen-gameover" class="modal-overlay hidden">
+      <div class="gothic-modal gameover-box">
+        <div class="death-icon">🩸</div>
+        <h2 class="gothic-heading danger">BURNED TO ASHES</h2>
+        <p class="death-tagline">The sunlight beams claimed your vampire soul...</p>
+
+        <div id="high-score-banner" class="high-score-banner hidden">
+          ✨ NEW HIGH SCORE! ✨
+        </div>
+
+        <div class="stats-summary">
+          <div class="stat-row">
+            <span>Final Score:</span>
+            <span id="final-score" class="stat-val">0</span>
+          </div>
+          <div class="stat-row">
+            <span>Distance Traveled:</span>
+            <span id="final-distance" class="stat-val">0m</span>
+          </div>
+          <div class="stat-row">
+            <span>Blood Drops Collected:</span>
+            <span id="final-blood" class="stat-val">0</span>
+          </div>
+          <div class="stat-row">
+            <span>Best High Score:</span>
+            <span id="final-best" class="stat-val">0</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button id="btn-restart" class="gothic-btn pulse">
+            <span>RISE AGAIN</span>
+            <span class="btn-subtext">(SPACE / ENTER)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

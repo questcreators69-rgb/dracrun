@@ -1,0 +1,15 @@
+{
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingComments": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.autoClosingOvertype": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.autoIndent": "none",
+    "editor.autoIndentOnPasteWithinString": false,
+    "editor.autoSurround": "never",
+    "editor.trimAutoWhitespace": false,
+    "html.autoClosingTags": false,
+    "javascript.autoClosingTags": false,
+    "typescript.autoClosingTags": false,
+    "editor.linkedEditing": false
+}

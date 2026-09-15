@@ -1,100 +1,71 @@
-# 🧛‍♂️ DracRun — Gothic 3D Endless Runner
+# Drac Run
 
-An action-packed, 3D perspective gothic endless runner web game built with pure **HTML5 Canvas**, **Vanilla JavaScript**, and **Web Audio API**.
+A 3D gothic-themed endless runner web game where you control Count Dracula running across Transylvanian rooftops while avoiding obstacles and searchlights.
 
-![DracRun Gameplay](assets/gameplay.png)
+## Description
 
----
+Drac Run is an action-packed 3D browser game built with HTML5 Canvas and the native Web Audio API. As Count Dracula, players navigate three lanes across cathedral rooftops under a midnight sky. The objective is to survive as long as possible while avoiding low ground flashlights and tall vertical searchlight beams. Jumping allows Dracula to morph into a vampire bat to clear obstacles, and collecting ruby blood droplets restores health while boosting your score. The visual elements, animations, and sound effects are generated procedurally in code without external asset files.
 
-## 📸 Screenshots
+## Screenshots
 
-|               Start Screen               |             Gameplay Action             |
-| :--------------------------------------: | :-------------------------------------: |
-| ![Start Screen](assets/start_screen.png) | ![Gameplay Action](assets/gameplay.png) |
+![Drac Run Gameplay](./assets/gameplay.png)
 
----
+![Drac Run Start Screen](./assets/start_screen.png)
 
-## 📜 Description
+## Getting Started
 
-In **DracRun**, you take control of Count Dracula sprinting across Transylvanian cathedral rooftops and cobblestone tracks under a glowing moonlit midnight sky. Heavy searchlights and flickering flashlights cast intense, burning beams across the lanes.
+### Dependencies
 
-Your goal is to survive as long as possible, dodge lethal searchlight beams, collect ruby blood droplets to replenish your **Blood Vitality**, and transform into a vampire bat to sail over ground obstacles!
+Before running Drac Run, ensure you have the following installed:
 
-### Key Features
+- Node.js (version 16.0 or higher)
+- npm (Node Package Manager, included with Node.js)
+- A modern web browser with HTML5 Canvas and Web Audio API support (Chrome, Firefox, Edge, or Safari)
+- Windows 10/11, macOS, or Linux operating system
 
-- 🌌 **Gothic Dark Mode Art Direction**: Procedural full moon with crater shading, glowing bloom, castle spires, gargoyles, drifting fog mist, and flapping moonlit bats.
-- 🦇 **Bat Morph Transformation**: Morph into a vampire bat with shadow smoke particles when jumping to clear low-ground flashlights.
-- 🔦 **Flickering Flashlights & Searchlights**: Avoid low ground flashlights and tall vertical searchlight sweeps that burn your HP.
-- 🩸 **Blood Vitality & Pickups**: Collect ruby blood droplets along parabolic jump arcs to heal and score points.
-- 🔊 **100% Procedural Web Audio API**: All sound effects and the ambient gothic drone soundtrack are synthesized natively in code—no external `.mp3` or `.wav` assets required!
-- ⚡ **High-Performance Object Pooling**: Optimized `requestAnimationFrame` game loop with `deltaTime` normalization for silky smooth 60fps/120fps gameplay.
+### Installing
 
----
+1. Clone the repository to your local computer:
 
-## 🚀 How to Try It
+```bash
+git clone https://github.com/questcreators69-rgb/dracrun_v.git
+```
 
-### Prerequisites
+2. Navigate to the project directory:
 
-- [Node.js](https://nodejs.org/) (v16 or higher)
-- `npm` package manager
+```bash
+cd dracrun
+```
 
-### Running Locally
+3. Install the required dependencies:
 
-1. **Clone the repository:**
+```bash
+npm install
+```
 
-   ```bash
-   git clone https://github.com/2300031005/dracrun.git
-   cd dracrun
-   ```
+### Executing program
 
-2. **Install dependencies:**
+1. Run the local development server:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm run dev
+```
 
-3. **Start the local development server:**
+2. Open your web browser and go to the URL output in your terminal (default is `http://localhost:5173`).
 
-   ```bash
-   npm run dev
-   ```
+3. Click on the canvas to start the game.
 
-4. **Play the game:**
-   Open your browser and navigate to `http://localhost:5173`.
+**Game Controls:**
 
----
+- **Move Left / Right**: `A` / `D` or `Left Arrow` / `Right Arrow` (or swipe left/right on mobile screens)
+- **Jump (Bat Morph)**: `W` / `Space` / `Up Arrow` (or swipe up on mobile screens)
+- **Pause / Resume**: `P` or `Esc`
 
-## 🎮 Controls
+## Help
 
-| Action               | Desktop Keyboard             | Mobile Touch / Gesture           |
-| :------------------- | :--------------------------- | :------------------------------- |
-| **Move Left**        | `◀ Left Arrow` / `A`         | Swipe Left                       |
-| **Move Right**       | `▶ Right Arrow` / `D`        | Swipe Right                      |
-| **Jump (Bat Morph)** | `▲ Up Arrow` / `W` / `Space` | Swipe Up / On-Screen Jump Button |
-| **Pause / Resume**   | `P` / `Esc`                  | Pause Button (HUD)               |
+- **No Audio**: Browsers block automatic audio playback until the user interacts with the page. Click anywhere inside the game window after loading to enable Web Audio output.
+- **Port Conflict**: If port 5173 is already in use by another application, specify a different port when running the dev server:
 
----
-
-## 🛠️ Technologies & Tools
-
-- **Core Logic**: Pure Vanilla JavaScript (ES Modules).
-- **Rendering Engine**: HTML5 Canvas 2D with custom pseudo-3D perspective projection math `(x, y, z) => (screenX, screenY, scale)`.
-- **Audio Synthesizer**: Native Web Audio API (`AudioContext`, `OscillatorNode`, `BiquadFilterNode`, `GainNode`, custom white noise buffer).
-- **Styling**: Vanilla CSS3 featuring glassmorphism (`backdrop-filter: blur()`), custom gothic typography, and responsive viewport sizing.
-- **Build System**: [Vite](https://vitejs.dev/) for instant dev module reloading and production bundling.
-
----
-
-## 🏆 Developer Notes & Bragging Rights
-
-- **Zero External Asset Dependencies**: Every single graphic (Dracula, bats, full moon, castle silhouettes, cobblestones, blood drops, fog particles) and sound effect (pickup chime, wing flap whoosh, sizzle hiss, gong hit, gothic drone) is **100% procedurally generated** in runtime code.
-- **Zero Garbage Collection Lag**: Pre-allocated object pools for flashlights, searchlights, blood droplets, and environmental particles guarantee zero allocations during active gameplay, keeping frame rates pinned at 60fps/120fps.
-- **Persistent High Scores**: Automatically saves your best high score to `localStorage`.
-
----
-
-## 💡 Inspiration
-
-_DracRun_ was born at 3:14 AM from a sudden burst of inspiration: combining the haunting gothic aesthetic of classic _Castlevania_ with the fast-paced, 3-lane perspective mechanics of _Subway Surfers_.
-
-The challenge was to build a complete, atmospheric 3D runner using **pure web standards** without loading heavy 3D game engines or bloated asset packs. The result is a lightweight, responsive gothic speedrun experience!
+```bash
+npm run dev -- --port 3000
+```
